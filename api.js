@@ -6,25 +6,36 @@ uuid = "UUID"
 
 function getLevel()
 {
-	fetch(`https://api.hypixel.net/player?key=${api_key}&uuid=${uuid}`)
+	fetch(`https://api.hypixel.net/status?key=${api_key}&uuid=${uuid}`) // check if player is online
 	.then(result => result.json())
-	.then(({ player }) => {
-		if(player["mostRecentGameType"] == "BEDWARS")
+	.then(({ session }) => {
+		if(session["online"])
 		{
-			display(true)
-			document.getElementById("level").innerHTML = String(player["achievements"]["bedwars_level"])
-			updateColorBW(player["achievements"]["bedwars_level"])
-			document.getElementById("progress").innerHTML = getProgressBW(player["stats"]["Bedwars"]["Experience"])
+			fetch(`https://api.hypixel.net/player?key=${api_key}&uuid=${uuid}`) // get player data
+			.then(result => result.json())
+			.then(({ player }) => {
+				if(player["mostRecentGameType"] == "BEDWARS")
+				{
+					display(true)
+					document.getElementById("level").innerHTML = String(player["achievements"]["bedwars_level"])
+					updateColorBW(player["achievements"]["bedwars_level"])
+					document.getElementById("progress").innerHTML = getProgressBW(player["stats"]["Bedwars"]["Experience"])
+				}
+				else if(player["mostRecentGameType"] == "SKYWARS")
+				{
+					display(true)
+					// to-do: add all symbols from https://pastebin.com/jVNCkpKz
+					document.getElementById("level").innerHTML = String(player["stats"]["SkyWars"]["levelFormatted"].substring(2,4))
+					updateColorSW(player["stats"]["SkyWars"]["levelFormatted"].substring(2,4))
+					document.getElementById("progress").innerHTML = getProgressSW(player["stats"]["SkyWars"]["skywars_experience"], player["stats"]["SkyWars"]["levelFormatted"].substring(2,4))
+				}
+				else // player is not in bedwars/skywars
+				{
+					display(false)
+				}
+			})
 		}
-		else if(player["mostRecentGameType"] == "SKYWARS")
-		{
-			display(true)
-			// to-do: add all symbols from https://pastebin.com/jVNCkpKz
-			document.getElementById("level").innerHTML = String(player["stats"]["SkyWars"]["levelFormatted"].substring(2,4))
-			updateColorSW(player["stats"]["SkyWars"]["levelFormatted"].substring(2,4))
-			document.getElementById("progress").innerHTML = getProgressSW(player["stats"]["SkyWars"]["skywars_experience"], player["stats"]["SkyWars"]["levelFormatted"].substring(2,4))
-		}
-		else // player is not in bedwars/skywars
+		else // do not show stats is player is not online
 		{
 			display(false)
 		}
