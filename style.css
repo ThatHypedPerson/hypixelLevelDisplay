@@ -1,0 +1,50 @@
+:root {
+    /* replaced in javascript with colors for current level */
+    --main: white;
+    --sub: #414141;
+}
+
+@font-face {
+    font-family: 'Minecraft';
+    src: url(Minecraft.otf); /* https://github.com/IdreesInc/Minecraft-Font */
+}
+
+body {
+    /* base text */
+    color: white;
+    text-shadow: 6.5pt 6.5pt 0 #414141;
+    background-color: gray;
+    font-size: 64pt;
+    font-family: Minecraft;
+    padding-left: 20px;
+}
+
+p {
+    padding : 0;
+    margin : 0;
+}
+
+#level {
+    color: var(--main);
+    text-shadow: 6.5pt 6.5pt 0 var(--sub);
+    position: relative;
+}
+
+@font-face {
+    /* scuffed way of getting the star icon */
+    font-family: 'star';
+    src: url(star.ttf);
+}
+
+#level::after {
+    font-family: star;
+    content: "\e900"; /* star icon in font */
+    
+    color: var(--main);
+    text-shadow: 3.3pt 3.3pt 0 var(--sub);
+
+    /* changing position to make text game-accurate */
+    font-size: 40pt;
+    position: absolute;
+    top: 8%;
+}
