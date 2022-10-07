@@ -4,11 +4,6 @@
     --sub: #414141;
 }
 
-@font-face {
-    font-family: 'Minecraft';
-    src: url(Minecraft.otf); /* https://github.com/IdreesInc/Minecraft-Font */
-}
-
 body {
     /* base text */
     color: white;
