@@ -25,9 +25,9 @@ function getLevel()
 				{
 					display(true)
 					// to-do: add all symbols from https://pastebin.com/jVNCkpKz
-					document.getElementById("level").innerHTML = String(player["stats"]["SkyWars"]["levelFormatted"].substring(2,4))
-					updateColorSW(player["stats"]["SkyWars"]["levelFormatted"].substring(2,4))
-					document.getElementById("progress").innerHTML = getProgressSW(player["stats"]["SkyWars"]["skywars_experience"], player["stats"]["SkyWars"]["levelFormatted"].substring(2,4))
+					document.getElementById("level").innerHTML = String(player["stats"]["SkyWars"]["levelFormatted"].slice(2,-1))
+					updateColorSW(player["stats"]["SkyWars"]["levelFormatted"].slice(2,-1))
+					document.getElementById("progress").innerHTML = getProgressSW(player["stats"]["SkyWars"]["skywars_experience"], player["stats"]["SkyWars"]["levelFormatted"].slice(2,-1))
 				}
 				else // player is not in bedwars/skywars
 				{
