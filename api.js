@@ -1,19 +1,21 @@
 // do /api in hypixel and add the key below
-api_key = "API_KEY_HERE"
+api_key = "28110408-1cca-4bd6-a3a6-3720bd0a5714"
 
 // look up your UUID and put it here
-uuid = "UUID"
+uuid = "f73b37d0137b40e682b1b5e400617ca6"
 
 function getLevel()
 {
 	fetch(`https://api.hypixel.net/status?key=${api_key}&uuid=${uuid}`) // check if player is online
 	.then(result => result.json())
 	.then(({ session }) => {
-		if(session["online"])
+		// if(session["online"])
+		if(true)
 		{
 			fetch(`https://api.hypixel.net/player?key=${api_key}&uuid=${uuid}`) // get player data
 			.then(result => result.json())
 			.then(({ player }) => {
+				console.log(player)
 				if(player["mostRecentGameType"] == "BEDWARS")
 				{
 					display(true)
@@ -78,29 +80,37 @@ function updateColorSW(level)
 // display exp requirements for next level
 function getProgressBW(exp)
 {
+	xp = document.getElementById("xp")
+	req = document.getElementById("needed")
+
 	// remove prestige exp from calculations
 	np_exp = exp % 487000 // 487000 exp is 100 levels
 
 	// levels X00 to X04 require different exp for each level
 	if(np_exp < 500) // 0 -> 1 star
 	{
-		return np_exp + "/" + 500
+		xp.innerHTML = np_exp
+		req.innerHTML = 500
 	}
 	else if(np_exp < 1500) // 1 -> 2 star
 	{
-		return (np_exp - 500) + "/" + 1000
+		xp.innerHTML = (np_exp - 500).toLocaleString('en-US')
+		req.innerHTML = (1000).toLocaleString('en-US')
 	}
 	else if(np_exp < 3500) // 2 -> 3 star
 	{
-		return (np_exp - 1500) + "/" + 2000
+		xp.innerHTML = (np_exp - 1500).toLocaleString('en-US')
+		req.innerHTML = (2000).toLocaleString('en-US')
 	}
 	else if(np_exp < 7000) // 3 -> 4 star
 	{
-		return (np_exp - 3500) + "/" + 3500
+		xp.innerHTML = (np_exp - 3500).toLocaleString('en-US')
+		req.innerHTML = (3500).toLocaleString('en-US')
 	}
 	else // stars 5-100
 	{
-		return ((np_exp - 7000) % 5000) + "/" + 5000
+		xp.innerHTML = ((np_exp - 7000) % 5000).toLocaleString('en-US')
+		req.innerHTML = (5000).toLocaleString('en-US')
 	}
 }
 
@@ -109,21 +119,30 @@ const xp_per = [0, 20, 50, 80, 100, 250, 500, 1000, 1500, 2500, 4000, 5000, 1000
 const total_xp_12 = [0, 20, 70, 150, 250, 500, 1000, 2000, 3500, 6000, 10000, 15000]
 function getProgressSW(exp, level)
 {
+	xp = document.getElementById("xp")
+	req = document.getElementById("needed")
+
 	if(level <= 12)
 	{
-		return (exp - total_xp_12[level - 1]) + "/" + xp_per[level - 1]
+		xp.innerHTML = (exp - total_xp_12[level - 1]).toLocaleString('en-US')
+		req.innerHTML = (xp_per[level - 1]).toLocaleString('en-US')
 	}
-	offset = 10000 * (level - 12)
-	return (exp - offset - 15000) + "/" + 10000
+	else
+	{
+		offset = 10000 * (level - 12)
+		xp.innerHTML = (exp - offset - 15000).toLocaleString('en-US')
+		req.innerHTML = (10000).toLocaleString('en-US')
+	}
 }
 
 // disable showing anything when not playing bedwars/skywars
 function display(show)
 {
+	console.log(show)
 	if(show)
 	{
 		document.getElementById("level_line").innerHTML = "Current Level: <span id='level'></span>"
-		document.getElementById("progress_line").innerHTML = "Progress: <span id='progress'></span>"
+		document.getElementById("progress_line").innerHTML = "Progress: <span id='xp'></span>/<span id='needed'></span>"
 	}
 	else
 	{

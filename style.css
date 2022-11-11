@@ -42,3 +42,13 @@ p {
     position: absolute;
     top: 8%;
 }
+
+#xp {
+    color: #55FFFF;
+    text-shadow: 6.5pt 6.5pt 0 #153f3f;
+}
+
+#needed {
+    color: #55ff55;
+    text-shadow: 6.5pt 6.5pt 0 #153f15;
+}

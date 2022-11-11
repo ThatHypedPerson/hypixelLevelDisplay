@@ -24,7 +24,7 @@ ThatHypedPerson Skywars
 ## Setup
 Download the zip of this repository at the top of the page and extract it to a known location.
 
-Download and install [this Minecraft font](https://github.com/IdreesInc/Minecraft-Font/releases/download/v1.0/Minecraft.otf).
+Download and install [this Minecraft font](https://github.com/IdreesInc/Minecraft-Font/releases/download/v1.0/Minecraft.otf) ([repo](https://github.com/IdreesInc/Minecraft-Font)).
 
 Navigate to `api.js` and change the variables at the top of the file to:
 - `api_key`: Connect to the Hypixel Network (mc.hypixel.net) and run the command `/api` to get your api key.
