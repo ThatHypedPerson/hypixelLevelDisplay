@@ -1,16 +1,15 @@
 // do /api in hypixel and add the key below
-api_key = "28110408-1cca-4bd6-a3a6-3720bd0a5714"
+api_key = "API_KEY_HERE"
 
 // look up your UUID and put it here
-uuid = "f73b37d0137b40e682b1b5e400617ca6"
+uuid = "PLAYER_UUID_HERE"
 
 function getLevel()
 {
 	fetch(`https://api.hypixel.net/status?key=${api_key}&uuid=${uuid}`) // check if player is online
 	.then(result => result.json())
 	.then(({ session }) => {
-		// if(session["online"])
-		if(true)
+		if(session["online"])
 		{
 			fetch(`https://api.hypixel.net/player?key=${api_key}&uuid=${uuid}`) // get player data
 			.then(result => result.json())
