@@ -124,7 +124,7 @@ function getProgressSW(exp, level)
 	if(level <= 12)
 	{
 		xp.innerHTML = (exp - total_xp_12[level - 1]).toLocaleString('en-US')
-		req.innerHTML = (xp_per[level - 1]).toLocaleString('en-US')
+		req.innerHTML = (xp_per[level]).toLocaleString('en-US')
 	}
 	else
 	{
